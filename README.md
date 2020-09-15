@@ -44,3 +44,5 @@ POST http://localhost:9045/api/send-crypto
     "endDate": null
 }
 ```
+
+Check the application logs to see encrypted JSON payload being sent and received and how it is getting decrypted to be used.
