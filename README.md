@@ -9,7 +9,7 @@ I used 2 encryption and decryption mechanism for this POC:
 1. Jackson Crypto as mentioned here: https://github.com/meltmedia/jackson-crypto
 2. Jasypt as mentioned here: http://www.jasypt.org/
 
-# How to run this spring boot app
+## How to run this spring boot app
 
 It is a maven project just do: `mvn clean install` and then run Spring Boot App in any IDE preferrably Spring Tool Suite.
 This app will run at `server.port=9045`
