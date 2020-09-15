@@ -1,4 +1,4 @@
-# encryptpayload to hide sensitive info in JSON payload
+# encryptpayload spring boot app to hide sensitive info in JSON payload
 
 encryptpayload is a simple spring boot app which encrypts and decrypts JSON fields to hide sensitive info (like password and userName) when the request is sent over network or passes through intermediate channels like some event driven system.
 
