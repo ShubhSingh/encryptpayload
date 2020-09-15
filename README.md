@@ -11,5 +11,6 @@ I used 2 encryption and decryption mechanism for this POC:
 
 # How to run this spring boot app
 
-It is a maven project just do: 'mvn clean install'
+It is a maven project just do: 
+  mvn clean install
 and then run Spring Boot App in any IDE preferrably Spring Tool Suite.
