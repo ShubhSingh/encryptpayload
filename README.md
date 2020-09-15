@@ -15,4 +15,29 @@ It is a maven project just do: mvn clean install and then run Spring Boot App in
 This app will run at server.port=9045
 
 Use POSTMAN to run REST apis for example:
+
 POST http://localhost:9045/api/send-jasypt
+{
+    "envName": "shusime",
+    "password": "Welcome@1",
+    "userName": "xyz@gmail.com",
+    "endDate": null
+}
+
+OR
+
+POST http://localhost:9045/api/send-crypto
+{
+    "envName": "shusime",
+    "password": {
+        "salt": "zk6g7KTuHb0GquM26/VDeMANBG4=",
+        "iv": "YuVPjgxPJK7jBrQrdSKfIw==",
+        "value": "o3ywZaXNlEVpRyKW38D0AQ=="
+    },
+    "userName": {
+        "salt": "zk6g7KTuHb0GquM26/VDeMANBG4=",
+        "iv": "YuVPjgxPJK7jBrQrdSKfIw==",
+        "value": "yEHxrTNbFKY+YNiLMYBDuDA+pm89l5Fw3iRP9jr4hVI="
+    },
+    "endDate": null
+}
