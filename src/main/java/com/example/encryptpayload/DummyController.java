@@ -45,18 +45,18 @@ public class DummyController {
 	@PostMapping(value = "/send-crypto", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<CryptoRequestPayload> sendCryptoEncryptedRequest(@RequestBody CryptoRequestPayload request) throws IOException {
 
-        log.info("Send request: {}", request);
-        
-        String url = "http://localhost:9045/api/receive-crypto";
+		log.info("Send request: {}", request);
 
-        HttpEntity<CryptoRequestPayload> requestEntity = new HttpEntity<>(request, getHeaders());
-        log.info("Calling url: {}", url);
-        ResponseEntity<CryptoRequestPayload> response = restTemplateWithCrypto.exchange(url, HttpMethod.POST, requestEntity, CryptoRequestPayload.class);
-        log.info("Received response back: {}", response.getBody());
+		String url = "http://localhost:9045/api/receive-crypto";
 
-        CryptoRequestPayload testingRequest = response.getBody();
-        return ResponseEntity.accepted().body(testingRequest);
-    }
+		HttpEntity<CryptoRequestPayload> requestEntity = new HttpEntity<>(request, getHeaders());
+		log.info("Calling url: {}", url);
+		ResponseEntity<CryptoRequestPayload> response = restTemplateWithCrypto.exchange(url, HttpMethod.POST, requestEntity, CryptoRequestPayload.class);
+		log.info("Received response back: {}", response.getBody());
+
+		CryptoRequestPayload testingRequest = response.getBody();
+		return ResponseEntity.accepted().body(testingRequest);
+    	}
 	
 	@PostMapping(value = "/receive-crypto", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> receiveCryptoEncryptedRequest(@RequestBody String json) throws IOException {
@@ -81,40 +81,40 @@ public class DummyController {
 	@PostMapping(value = "/send-jasypt", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<JasyptRequestPayload> sendRequestJasypt(@RequestBody JasyptRequestPayload request) {
 		
-        log.info("Intial request: {}", request);
-        
-        if (request.getPassword()!=null && !request.getPassword().isEmpty()) {
-        	request.setPassword(textEncryptor.encrypt(request.getPassword()));
-        }
-        if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
-        	request.setUserName(textEncryptor.encrypt(request.getUserName()));
-        }
-        
-        log.info("Send encrypted request: {}", request);
-        String url = "http://localhost:9045/api/receive-jasypt";
+		log.info("Intial request: {}", request);
 
-        HttpEntity<JasyptRequestPayload> requestEntity = new HttpEntity<>(request, getHeaders());
-        
-        log.info("Calling url: {}", url);
-        
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<JasyptRequestPayload> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, JasyptRequestPayload.class);
-        
-        JasyptRequestPayload responsePayload = response.getBody();
-        
-        log.info("Received encrypted response back: {}", response.getBody());
-        
-        if (responsePayload.getPassword()!=null && !responsePayload.getPassword().isEmpty()) {
-        	responsePayload.setPassword(textEncryptor.decrypt(responsePayload.getPassword()));
-        }
-        if (responsePayload.getUserName()!=null && !responsePayload.getUserName().isEmpty()) {
-        	responsePayload.setUserName(textEncryptor.decrypt(responsePayload.getUserName()));
-        }
-        
-        log.info("Decrypted to required response object: {}", responsePayload);
+		if (request.getPassword()!=null && !request.getPassword().isEmpty()) {
+			request.setPassword(textEncryptor.encrypt(request.getPassword()));
+		}
+		if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
+			request.setUserName(textEncryptor.encrypt(request.getUserName()));
+		}
 
-        return ResponseEntity.accepted().body(responsePayload);
-    }
+		log.info("Send encrypted request: {}", request);
+		String url = "http://localhost:9045/api/receive-jasypt";
+
+		HttpEntity<JasyptRequestPayload> requestEntity = new HttpEntity<>(request, getHeaders());
+
+		log.info("Calling url: {}", url);
+
+		RestTemplate restTemplate = new RestTemplate();
+		ResponseEntity<JasyptRequestPayload> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, JasyptRequestPayload.class);
+
+		JasyptRequestPayload responsePayload = response.getBody();
+
+		log.info("Received encrypted response back: {}", response.getBody());
+
+		if (responsePayload.getPassword()!=null && !responsePayload.getPassword().isEmpty()) {
+			responsePayload.setPassword(textEncryptor.decrypt(responsePayload.getPassword()));
+		}
+		if (responsePayload.getUserName()!=null && !responsePayload.getUserName().isEmpty()) {
+			responsePayload.setUserName(textEncryptor.decrypt(responsePayload.getUserName()));
+		}
+
+		log.info("Decrypted to required response object: {}", responsePayload);
+
+		return ResponseEntity.accepted().body(responsePayload);
+    	}
 	
 	@PostMapping(value = "/receive-jasypt", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 	public ResponseEntity<JasyptRequestPayload> receiveRequestJasypt(@RequestBody JasyptRequestPayload request) throws IOException {
@@ -122,11 +122,11 @@ public class DummyController {
 		log.info("Received encrypted incoming request: {}", request);
 
 		if (request.getPassword()!=null && !request.getPassword().isEmpty()) {
-        	request.setPassword(textEncryptor.decrypt(request.getPassword()));
-        }
-        if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
-        	request.setUserName(textEncryptor.decrypt(request.getUserName()));
-        }
+			request.setPassword(textEncryptor.decrypt(request.getPassword()));
+		}
+		if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
+			request.setUserName(textEncryptor.decrypt(request.getUserName()));
+		}
 		
 		log.info("Decrypted to required request object: {}", request);
 
@@ -134,10 +134,10 @@ public class DummyController {
 		
 		if (request.getPassword()!=null && !request.getPassword().isEmpty()) {
         	request.setPassword(textEncryptor.encrypt(request.getPassword()));
-        }
-        if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
-        	request.setUserName(textEncryptor.encrypt(request.getUserName()));
-        }
+		}
+		if (request.getUserName()!=null && !request.getUserName().isEmpty()) {
+			request.setUserName(textEncryptor.encrypt(request.getUserName()));
+		}
 		
 		log.info("Return response as encrypted json: {}", request);
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(request);
